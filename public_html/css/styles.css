@@ -1,10 +1,213 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 24.03.2019, 17:56:41
-    Author     : ns
-*/
+@font-face {
+    font-family: 'Helvetica Neue Cyr Thin';
+    src: url('../font/HelveticaNeueCyr-Thin.eot');
+    src: url('../font/HelveticaNeueCyr-Thin.eot?#iefix') format('embedded-opentype'),
+    url('../font/HelveticaNeueCyr-Thin.woff') format('woff'),
+    url('../font/HelveticaNeueCyr-Thin.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    font-family: 'Helvetica Neue Cyr Thin';
+    background-color: #e2e2e2;
+    /*font-weight: bold;*/
+}
+
+
+header{
+    background-image: url(../img/setwalls.ru-67572.jpg);
+    color: white;
+    height: 541px;
+}
+
+#main_top_menu{
+    display: flex;
+    height: 60px;
+    background-image: linear-gradient(rgba(56, 56, 76, 0.82), rgba(0, 0, 0, 0.82));
+    justify-content: center;
+    align-items: center;
+}
+
+#main_top_menu .menu_item{
+    color: white;
+    padding: 0 5%;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#main_article{
+    display: flex;
+    justify-content: center;
+    height: 50%;
+    
+}
+.container{
+    width: 45%;
+    text-align: justify;
+    align-self: center;
+}
+
+#main_article h1{
+    text-align: center;
+    margin-bottom: 38px;
+    text-transform: uppercase;
+}
+
+
+#contact_me{
+    align-self: center;
+    background-color: rgba(204, 204, 204, 0.46);
+    padding: 12px 65px;
+    border-radius: 25px;
+    border: rgba(255, 255, 255, 0.48) solid 1px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+
+main{
+    display: flex;
+    flex-direction: column;
+}
+
+section{
+    margin: 74px 0 0 12%;
+}
+
+.section_title{
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+}
+.section_title>small{
+    font-size: 12px;
+    color: #797979;
+    text-transform: lowercase;
+}
+.section_block{
+    margin: 0px 10px;
+}
+.section_block img{
+    border: 1px solid black;
+    border-radius: 3px;
+}
+.section_block p{
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+.djing_blocks{
+    display: flex;
+    flex-direction: row;
+}
+
+
+.section_theme{
+    margin: 10px;
+    width: 540px;
+}
+.section_theme .section_descr{
+    background-color: white;
+    padding: 20px 16px 16px 16px;
+    display: flex;
+}
+.big-icon{
+    border-radius: 64px;
+    padding: 12px 12px;
+    border: 3px solid black;
+    font-size: 96px;
+    height: 96px;
+}
+.big-icon:before{
+    margin: 0;
+}
+.section_img{
+    
+}
+.sect_divide{
+    height: 4px;
+    display: flex;
+    align-items: center;
+}
+.sect_divide>i{
+    width: 26px;
+    height: 26px;
+    background-color: white;
+    border-radius: 19px;
+    margin-left: 52px;
+    font-size: 23px;
+}
+.sect_divide>i:before{
+    margin-left: 2px;
+}
+.section_descr_text{
+    margin-left: 16px;
+}
+.section_theme i[class^='icon-'].red{
+    border: 4px solid red;
+}
+.section_theme span.red{
+    background-color: red;
+}
+.section_theme i[class^='icon-'].blue{
+    border: 4px solid #2f8fed;
+}
+.section_theme span.blue{
+    background-color: #2f8fed;
+}
+.section_theme i[class^='icon-'].green{
+    border: 4px solid green;
+}
+.section_theme span.green{
+    background-color: green;
+}
+
+
+.container-inline{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.container-column{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.blue_yellow{
+    color: #eebc30;
+    background-color: #2f8fed;
+}
+.yellow_blue{
+    color: #2f8fed;
+    background-color: #eebc30;
+}
+
+
+
+footer{
+    background-image: radial-gradient(ellipse at top, #383838, #000);
+    height: 435px;
+    color: #b5b5b5;
+    margin-top: 89px;
+}
+
+footer .row{
+    margin: 5% 12% 0 12%;
+}
+footer .col{
+    width: 50%;
+}
+footer .bottom{
+    align-self: center;
+    margin-top: auto;
+    margin-bottom: 10px;
+    color: #797979;
+    font-size: 14px;
+}
