@@ -1,13 +1,14 @@
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>проба</title>
+        <!--[if lt IE 9]><meta http-equiv="refresh" content="0;URL=bad_ie.html" /><![endif]-->
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link type="text/css" rel="stylesheet" href="css/fontello/fontello-embedded.css">
         <link type="text/css" rel="stylesheet" href="css/styles.css">
     </head>
     <body>
-        <header class="container-column">
+        <header class="container">
             <menu id="main_top_menu">
                 <a href="#" class="menu_item">
                     <i class="icon-home"></i>&nbsp;Главная
@@ -23,8 +24,8 @@
                 </a>
             </menu>
             <article id="main_article">
-                <div class="container">
-                    <h1>Дмитрий Новиков</h1>
+                <div>
+                    <h1>Название</h1>
                     <p>Меня зовут Дмитрий, я разрабатываю web проекты на основе Python/Django.
                         Опыт разработки с 2014 года. Меня зовут Дмитрий, я разрабатываю web
                         проекты на основе Python/Django. Опыт разработки с 2014 года.
@@ -38,13 +39,13 @@
                 <i class="icon-mail"></i> Напишите мне
             </a>
         </header>
-        <main>
+        <main class="container">
             <section>
                 <h2 class="section_title">
                     Проект Djing
                     <small>Биллинг для небольшой сети интернет провайдера.</small>
                 </h2>
-                <div class="djing_blocks">
+                <div class="container-inline justify_space">
                     <div class="section_block">
                         <img class="section_img" alt="preview" src="img/screenshots/scr1.PNG">
                         <p>Скриншот списка групп. А в меню пример невыполненных задач из модуля тикетов.</p>
@@ -54,15 +55,15 @@
                         <p>А так выглядит форма входа и для сотрудников и для абонентов.</p>
                     </div>
                     <div class="section_block">
-                        <img class="section_img" alt="preview" src="img/screenshots/map.PNG">
-                        <p>Устройства можно вывести на карту и наблюдать их
-                            состояния из вашей системы мониторинга.</p>
+                        <img class="section_img" alt="preview" src="img/screenshots/dev.png">
+                        <p>Устройства можно мониторить в реальном времени, и управлять
+                           состоянием портов.</p>
                     </div>
                 </div>
             </section>
             <section>
                 <h2 class="section_title">С чем доводилось работать..</h2>
-                <div class="container-inline">
+                <div class="container-inline justify_space">
                     <div class="section_theme">
                         <img class="section_img" alt="preview" src="img/python.jpg">
                         <span class="sect_divide red">
@@ -88,7 +89,7 @@
                                 <b>Администрирование GNU/Linux</b>
                                 <p>Установка дистрибутивов debian, ubuntu, Archlinux,
                                     Centos, Fedora. Настойка WEB серверов на Apache
-                                    или Nginx для php, python, perl, или любых cgi
+                                    или Nginx для php, python или любых cgi
                                     скриптов. Диагностика и устранение проблем с
                                     функционированием linux сервера. Помощь с Linux на ПК.</p>
                             </div>
@@ -130,8 +131,8 @@
                 </div>
             </section>
         </main>
-        <footer class="container-column">
-            <div class="row container-inline">
+        <footer class="container">
+            <div class="row container-inline justify_space">
                 <div class="col">
                     <b>Контакты</b>
                     <dl>
@@ -153,9 +154,9 @@
                         HTML5, CSS3. Other: Photoshop, git, php, C, Go, bash, PyCharm.</p>
                 </div>
             </div>
-            <div class="row container-column bottom">
-                <span>&copy; Дмитрий Новиков 2019.</span>
-                <span>Ресурс не ведёт предпринимательской деятельности</span>
+            <div class="row container bottom">
+                <small>&copy; Дмитрий Новиков 2019.</small>
+                <small>Ресурс не ведёт предпринимательской деятельности</small>
             </div>
         </footer>
     </body>

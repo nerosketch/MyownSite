@@ -1,41 +1,47 @@
-@font-face {
-    font-family: 'Helvetica Neue Cyr Thin';
-    src: url('../font/HelveticaNeueCyr-Thin.eot');
-    src: url('../font/HelveticaNeueCyr-Thin.eot?#iefix') format('embedded-opentype'),
-    url('../font/HelveticaNeueCyr-Thin.woff') format('woff'),
-    url('../font/HelveticaNeueCyr-Thin.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
 *{
     padding: 0;
     margin: 0;
 }
 body{
-    font-family: 'Helvetica Neue Cyr Thin';
+    font-family: Arial, Helvetica, sans-serif;
     background-color: #e2e2e2;
-    /*font-weight: bold;*/
 }
 
 
 header{
-    background-image: url(../img/setwalls.ru-67572.jpg);
+    background: url(../img/setwalls.ru-67572.jpg) center;
+    background-size: cover;
     color: white;
     height: 541px;
+}
+
+small{
+    font-size: 0.75em;
+}
+
+@supports (display: grid) {
+    dl{
+        display: grid;
+        grid-template-columns: auto 1fr;
+    }
+    dl>dt{
+        min-width: 0;
+    }
+    dl>dd{
+        margin: 0 0 0 3em;
+    }
 }
 
 #main_top_menu{
     display: flex;
     height: 60px;
-    background-image: linear-gradient(rgba(56, 56, 76, 0.82), rgba(0, 0, 0, 0.82));
-    justify-content: center;
+    background-image: linear-gradient(rgba(56, 56, 76, 0.92), rgba(0, 0, 0, 0.92));
+    justify-content: space-evenly;
     align-items: center;
 }
 
 #main_top_menu .menu_item{
     color: white;
-    padding: 0 5%;
     font-size: 16px;
     font-weight: bold;
 }
@@ -43,10 +49,10 @@ header{
 #main_article{
     display: flex;
     justify-content: center;
-    height: 50%;
+    height: 73%;
     
 }
-.container{
+#main_article>div{
     width: 45%;
     text-align: justify;
     align-self: center;
@@ -78,7 +84,7 @@ main{
 }
 
 section{
-    margin: 74px 0 0 12%;
+    margin: 5% 12% 0 12%;
 }
 
 .section_title{
@@ -91,7 +97,7 @@ section{
     text-transform: lowercase;
 }
 .section_block{
-    margin: 0px 10px;
+    max-width: 300px;
 }
 .section_block img{
     border: 1px solid black;
@@ -100,11 +106,6 @@ section{
 .section_block p{
     font-size: 14px;
     margin-top: 8px;
-}
-
-.djing_blocks{
-    display: flex;
-    flex-direction: row;
 }
 
 
@@ -168,17 +169,24 @@ section{
     background-color: green;
 }
 
-
+/*
+ * Global
+ */
 .container-inline{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
-.container-column{
+.container{
     display: flex;
     flex-direction: column;
 }
-
+.justify_space{
+    justify-content: space-around;
+}
+/*
+ * End GLobal
+ */
 
 .blue_yellow{
     color: #eebc30;
@@ -202,7 +210,8 @@ footer .row{
     margin: 5% 12% 0 12%;
 }
 footer .col{
-    width: 50%;
+    width: 540px;
+    margin: 3% 0 3% 0;
 }
 footer .bottom{
     align-self: center;
