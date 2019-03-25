@@ -115,6 +115,10 @@ section{
     width: 540px;
     margin: 10px;
 }
+section a.cert_block{
+    text-decoration: none;
+    color: inherit;
+}
 
 
 .section_theme{
