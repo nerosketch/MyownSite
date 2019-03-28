@@ -16,11 +16,11 @@ header{
 header.main{
     background: url(../img/setwalls.ru-67572.jpg) center;
 }
-header.doc{
-    background: url(../img/digital_line.png) center;
-}
 header.djing{
     background: url(../img/djing/background.jpg) left;
+}
+header.devices{
+    background: url(../img/devices/background.jpg) left;
 }
 
 small{
@@ -153,6 +153,7 @@ section a.cert_block{
     height: 4px;
     display: flex;
     align-items: center;
+    margin-top: -4px;
 }
 .sect_divide>i{
     width: 26px;
@@ -206,6 +207,9 @@ section a.cert_block{
     justify-content: center;
     align-items: center;
 }
+.justify_left{
+    justify-content: left;
+}
 /*
  * End GLobal
  */
@@ -246,9 +250,6 @@ footer a{
     color: #b5b5b5;
 }
 
-.h200{
-    height: 200px;
-}
 .h500{
     height: 541px;
 }
