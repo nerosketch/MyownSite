@@ -18,7 +18,9 @@ header.main{
 }
 header.doc{
     background: url(../img/digital_line.png) center;
-
+}
+header.djing{
+    background: url(../img/djing/background.jpg) left;
 }
 
 small{
@@ -239,6 +241,9 @@ footer .bottom{
     margin-bottom: 10px;
     color: #797979;
     font-size: 14px;
+}
+footer a{
+    color: #b5b5b5;
 }
 
 .h200{
