@@ -13,7 +13,7 @@ let currentPos = window.pageYOffset;
 let update = function update() {
     let newPos = window.pageYOffset;
     let diff = newPos - currentPos;
-    let speed = diff * 0.15;
+    let speed = diff * 0.1;
     section.style.transform = 'skewY(' + speed + 'deg)';
     currentPos = newPos;
     requestAnimationFrame(update);
