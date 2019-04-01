@@ -10,7 +10,6 @@ body{
 
 
 header{
-    background-size: cover;
     color: white;
 }
 header.main{
@@ -40,6 +39,54 @@ small{
     }
 }
 
+
+/*
+ * Ссылки
+ */
+a.menu_item {
+  text-decoration: none;
+  position: relative;
+  padding: 0 0 5px 0;
+}
+
+a.menu_item:after {
+  content: '';
+  position: absolute;
+  height: 1px;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  visibility: hidden;
+  background-color: #585858;
+  -webkit-transition: all .1s ease;
+  transition: all 0.3s ease;
+  -webkit-transform: scaleX(0);
+  -ms-transform: scaleX(0);
+  transform: scaleX(0);
+}
+
+a.menu_item:hover:after {
+  visibility: visible;
+  -webkit-transform: scaleX(1);
+  -ms-transform: scaleX(1);
+  transform: scaleX(1);
+}
+/*
+ * End Ссылки
+ */
+
+
+
+
+/*
+ * Z-index
+ */
+.z1{z-index: 1}
+.z2{z-index: 2}
+.z3{z-index: 3}
+
+
+
 #main_top_menu{
     display: flex;
     height: 60px;
@@ -52,8 +99,6 @@ small{
     color: white;
     font-size: 16px;
     font-weight: bold;
-    text-decoration: none;
-    border-bottom: 1px solid #585858;
 }
 
 #main_article{
@@ -252,4 +297,48 @@ footer a{
 
 .h500{
     height: 541px;
+}
+
+
+/*
+ * Anim button gradient
+ */
+.btn_grad {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn_grad>* {
+    position: relative;
+    pointer-events: none;
+}
+
+.btn_grad::before {
+    --size: 0;
+    content: '';
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: var(--size);
+    height: var(--size);
+    background: radial-gradient(circle closest-side, rgba(255, 255, 255, 0.28), transparent);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    transition: width .2s ease, height .2s ease;
+}
+
+.btn_grad:hover::before {
+    --size: 400px;
+}
+/*
+ * End Anim button gradient
+ */
+
+
+
+#canv{
+    position: absolute;
+    z-index: 1;
+
+    opacity: 0.6;
 }
