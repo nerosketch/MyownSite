@@ -2,15 +2,17 @@
 <html lang="ru">
 <head>
     <title>Djing</title>
-    <!--[if lt IE 9]><meta http-equiv="refresh" content="0;URL=bad_ie.html" /><![endif]-->
+    <!--[if lt IE 9]><meta http-equiv="refresh" content="0;URL=bad_ie.html"/><![endif]-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="css/fontello/fontello-embedded.css">
     <link type="text/css" rel="stylesheet" href="css/styles.css">
+    <link type="text/css" rel="stylesheet" href="css/article.css">
 </head>
 <body>
-    <header class="container h500 djing">
-        <menu id="main_top_menu">
+<div class="parallax">
+    <header class="container h500 djing parallax_layer">
+        <nav id="main_top_menu">
             <a href="#" class="menu_item">
                 <i class="icon-home"></i>&nbsp;Главная
             </a>
@@ -23,138 +25,398 @@
             <a href="#" class="menu_item">
                 <i class="icon-cog"></i>&nbsp;Контакты
             </a>
-        </menu>
+        </nav>
         <article id="main_article" class="justify_center">
             <div>
                 <h1>Проект Djing</h1>
                 <p>Простая биллинговая система для интернет провайдера. На текущий момент поддерживает
-                   управление множественными серверами доступа Mikrotik. Есть платёжная система по протоколу
-                   от CityPay. Система тикетов не даст задачам которые нужно выполнить затеряться
-                   в рабочей суете, при этом всю возможную информацию, которая уже есть в базе не нужно будет
-                   указываеть снова, диспетчеру достаточно нажать на учётную запись позвонившего, и биллинг сам
-                   назначит её тем сотрудникам, которые ответственны за район в котором проживает абонент.
-                   А управление оборудованием позволит лишний раз не напрягать вашего админа чтоб посмотреть состояние
-                   портов оборудования, и он мог заниматься автоматизацией. И ещё многое другое под катом :)</p>
+                    управление множественными серверами доступа Mikrotik. Есть платёжная система по протоколу
+                    от CityPay. Система тикетов не даст задачам которые нужно выполнить затеряться
+                    в рабочей суете, при этом всю возможную информацию, которая уже есть в базе не нужно будет
+                    указываеть снова, диспетчеру достаточно нажать на учётную запись позвонившего, и биллинг сам
+                    назначит её тем сотрудникам, которые ответственны за район в котором проживает абонент.
+                    А управление оборудованием позволит лишний раз не напрягать вашего админа чтоб посмотреть состояние
+                    портов оборудования, и он мог заниматься автоматизацией. И ещё многое другое под катом :)</p>
             </div>
         </article>
         <a href="https://github.com/nerosketch/djing" id="contact_me" target="_blank" class="btn_grad">
             <i class="icon-github"></i> Djing на Github
         </a>
     </header>
-    <main class="container">
+    <main class="container parallax_content">
         <section>
             <h2 class="section_title">
                 Оглавление
             </h2>
             <div class="container-inline justify_left">
                 <ol>
-                    <li><a href="#">Установка</a></li>
+                    <li><b>Установка</b></li>
+                    <li><a href="#">Сервисы и API</a></li>
+                    <li><a href="#">Менеджеры устройств</a></li>
+                    <li><a href="#">Сбор информации трафика по netflow</a></li>
+                    <li><a href="#">Работа с представлениями</a></li>
+                    <li><a href="#">DHCP</a></li>
+                    <li><a href="#">Страница абонента</a></li>
+                    <li><a href="#">Дополнительный функционал</a></li>
+                    <li><a href="#">Руководство пользователя</a></li>
                 </ol>
             </div>
         </section>
         <section>
-            <h2>Установка Djing</h2>
-            <div class="container-inline justify_left">
-                <p>
-                    Работа предполагается на python3.
-                    Я предпочитаю запускать wsgi сервер на связке uWSGI + Nginx, так что ставить будем соответствующие пакеты.
-                    <b>На Fedora25 нужные пакеты можно установить так:</b>
-                    Для начала подготовим систему, очистим и обновим пакеты. Процесс обновления долгий, так что можно пойти заварить себе чай :)
-                    <code lang="bash">
-                        # dnf clean all
-                        # dnf -y update
-                    </code>
-                    Затем установим зависимости
-                    <code lang="bash">
-                        # dnf -y install python3 python3-devel python3-pip python3-pillow mariadb mariadb-devel uwsgi nginx uwsgi-plugin-python3 net-snmp net-snmp-libs net-snmp-utils net-snmp-devel net-snmp-python git redhat-rpm-config curl-devel expect
-                    </code>
-                    Необходимо чтоб версия python по умолчанию была третья:
-                    <code lang="bash">
-                        # ln -sf python3 /usr/bin/python
-                    </code>
-                    Условимся что путь к папке с проектом находится по адресу: /var/www/djing. Дальше создадим каталок для web, затем обновляем pip и ставим проект через pip:
-                    <code lang="bash">
-                        # mkdir /var/www
-                        # cd /var/www
-                        # pip3 install --upgrade pip
-                        # git clone https://github.com/nerosketch/djing.git
-                        # export PYCURL_SSL_LIBRARY=openssl
-                        # pip3 install -r djing/requirements.txt
-                    </code>
-                    Скопируем конфиги из примеров в реальные:
-                    <code lang="bash">
-                    $ cd /var/www/djing
-                    $ cp djing/settings_example.py djing/settings.py
-                    </code>
-                    Затем отредактируйте конфиги для своих нужд.
-                    Для удобства я создаю пользователя и группу http:http, и всё что связано с web-сервером запускаю от имени http.
-                    <code lang="bash">
-                        # groupadd -r http
-                        # useradd -l -M -r -d /dev/null -g http -s /sbin/nologin http
-                        # chown -R http:http /var/www
-                        # chown -R http:http /etc/nginx
-                        # chown -R http:http /etc/uwsgi.*
-                        # chown -R http:http /run/uwsgi/
-                    </code>
-                </p>
-                <h2>Настройка WEB Сервера</h2>
-                <p>
-                    Конфиг Nginx на моём рабочем сервере выглядит так:
-                    <code lang="nginx">
-                        user http;
-worker_processes auto;
-pid /run/nginx.pid;
+            <div class="content-article-header">
+                <span>Последнее обновление <time>3 апреля 2019г</time></span>
+            </div>
+            <article class="content-article">
 
-events {
-    worker_connections 1024;
+
+                <h2>Установка:</h2>
+                <p>Работа предполагается на python3.
+                    Я предпочитаю запускать wsgi сервер на связке uWSGI + Nginx, так что ставить будем соответствующие
+                    пакеты.</p>
+                <p>Для быстрой установки, чтоб посмотреть что из себя представляет web интерфейс биллинга, можно
+                    воспользоваться
+                    инстальником из <em>install/install_debian.sh</em>. Он установит зависимости, виртуальное окружение
+                    python, сервер очередей
+                    <em>Celery</em>, и создаст пользователя <em>admin</em> с паролем <em>admin</em>, так, что вы сразу
+                    сможете зайти в web интерфейс под этой
+                    учётной записью, а в последствии, если вам будет интересно, уже разбираться в детелях и тонкостях
+                    устройства биллинга.</p>
+                <p>А ниже подробная инструкция по установке вручную, контролируя все этапы установки.</p>
+                <h5>Подготовка системы</h5>
+                <p>Установка происходит в debian версии 9.5.</p>
+                <p>Для начала подготовим систему, очистим и обновим пакеты. Процесс обновления долгий, так что можно
+                    пойти
+                    заварить себе чай :)</p>
+                <pre><code class="lang-bash"><span class="c-green">#</span> dnf clean all
+<span class="c-green">#</span> dnf -y update
+</code></pre>
+                <p>Затем установим зависимости, в Debian9.5 пакеты называются так:</p>
+                <pre><code class="lang-bash"><span class="c-green">#</span> apt install mariadb-server libmariadb-dev libmariadbclient-dev \
+    mariadb-client python3-dev python3-pip python3-pil python3-venv uwsgi \
+    nginx uwsgi-plugin-python3 libsnmp-dev git gettext libcurl4-openssl-dev \
+    libssl-dev expect redis-server
+</code></pre>
+                <p>Пакеты <em>libsnmp-dev</em> и <em>expect</em> нужны для управления и мониторинга оборудования,
+                    redis-server для
+                    сервера очередей <em>Celery</em>.</p>
+                <p>Условимся, что путь к папке с проектом находится по пути: <em>/var/www/djing</em>.
+                    Дальше создадим каталок для web, затем создаём virtualenv, обновляем pip и ставим проект через pip:
+                </p>
+                <pre><code class="lang-bash"><span class="c-green">#</span> <span class="s2">mkdir /var/www</span>
+<span class="c-green">#</span> <span class="s2">cd /var/www</span>
+<span class="c-green">#</span> <span class="s2">git clone --depth=1 https://github.com/nerosketch/djing.git</span>
+<span class="c-green">#</span> <span class="s2">python3 -m venv venv</span>
+<span class="c-green">#</span> <span class="s2">cd djing</span>
+<span class="c-green">#</span> <span class="s2">source ./venv/bin/activate</span>
+<span class="c-green">#</span> <span class="s2">pip3 install --upgrade pip</span>
+<span class="c-green">#</span> <span class="s2">export PYCURL_SSL_LIBRARY=openssl</span>
+<span class="c-green">#</span> <span class="s2">pip3 install -r djing/requirements.txt</span>
+<span class="c-green">#</span> <span class="s2">chown -R www-data:www-data /var/www/djing</span>
+<span class="c-green">#</span> <span class="s2">deactivate</span>
+</code></pre>
+                <p>Или, вместо этих комманд выполните инстальник из <em>install/install_debian.sh</em> если у вас
+                    <em>debian</em>,
+                    или по аналогии для других дистрибутивов.</p>
+                <p>Теперь давайте перейдём в баш от имени пользователя www-data, так у нас будет хватать прав на все
+                    директории и файлы</p>
+                <pre><code class="lang-bash"><span class="c-green">$</span> sudo -u www-data -g www-data bash &amp;&amp; cd /
+</code></pre>
+                <p>Скопируем конфиг из примера в реальный:</p>
+                <pre><code class="lang-bash"><span class="c-green">$</span> cd /var/www/djing
+<span class="c-green">$</span> cp djing/local_settings.py.example djing/local_settings.py
+</code></pre>
+                <p>Затем отредактируйте конфиг для своих нужд.</p>
+                <p>В Debian использую пользователя www-data, остаётся только назначить владельца на папки:</p>
+                <pre><code class="lang-bash"><span class="c-green">#</span> chown -R www-data:www-data /var/www/djing
+</code></pre>
+                <h3 id="-web-">Настройка WEB Сервера</h3>
+                <p>Конфиг Nginx в папке <em>sites-available</em> на моём рабочем сервере выглядит примерно так как
+                    указано
+                    ниже, не забудьте указать в нужных местах ваш домен.</p>
+                <pre><code class="lang-nginx"><span class="c-red">upstream</span> <span class="c-blue">djing</span> {
+    <span class="c-red">server</span> <span class="c-green">unix://</span>/run/uwsgi/app/djing/socket;
 }
 
-http {
-    sendfile            on;
-    tcp_nopush          on;
-    tcp_nodelay         on;
-    keepalive_timeout   65;
-    types_hash_max_size 2048;
+# Для обращений в web серверу на localhost из скриптов
+<span class="c-red">server</span> {
+    <span class="c-red">listen</span> 80;
+    <span class="c-red">server_name</span> <span class="c-blue">localhost</span> 127.0.0.1;
+    <span class="c-red">location</span> / {
+        <span class="c-red">uwsgi_pass</span> djing;
+        <span class="c-red">include</span> uwsgi_params;
+    }
+    <span class="c-red">access_log</span> /dev/null;
+    <span class="c-red">error_log</span> /dev/null;
+}
 
-    include             /etc/nginx/mime.types;
-    default_type        application/octet-stream;
+# Это редирект с http на https, если у вас есть ssl сертификат
+<span class="c-red">server</span>{
+    <span class="c-red">listen</span> 80;
+    <span class="c-red">server_name</span> your-domain.com;
+    <span class="c-blue">return</span> 301 https://your-domain.com$request_uri;
+}
 
-    upstream djing { server unix:///run/uwsgi/djing.sock; }
+# обработка http запросов.
+<span class="c-red">server</span> {
+    <span class="c-red">listen</span> 80 <span class="c-blue">default_server</span>;
+    <span class="c-red">server_name</span> &lt;ваш домен&gt;;
+    <span class="c-red">root</span> /var/www/djing/;
+    <span class="c-red">charset</span> utf-8;
 
-    server {
-        listen 80;
-        server_name   &blacktriangleleft;ваш-домен&blacktriangleright;;
-        root         /var/www/djing;
-        charset      utf-8;
+    <span class="c-red">location</span> = <span class="c-blue">/favicon.ico</span> { <span class="c-red">alias</span> /var/www/djing/static/img/favicon_m.ico; }
+    <span class="c-red">location</span> = <span class="c-blue">/robots.txt</span> { <span class="c-red">alias</span> /var/www/djing/robots.txt; }
 
-        # укажите где лежит ваш раздел с медиа для сайта
-        location /media  {
-            alias /var/www/djing/media;
-        }
+    <span class="c-red">location</span> <span class="c-blue">/media</span> {
+        <span class="c-red">alias</span> /var/www/djing/media;
+        <span class="c-red">expires</span> 7d;
+    }
 
-        # местоположение статики
-        location /static {
-            alias /var/www/djing/static;
-        }
+    <span class="c-red">location</span> <span class="c-blue">/static</span> {
+        <span class="c-red">alias</span> /var/www/djing/static;
+        <span class="c-red">expires</span> 1d;
+    }
 
-        # тут надо указать путь куда у вас установился Django + путь к статике админки
-        # путь к Django тут: /usr/lib/python3.5/site-packages/django
-        # путь к статике соответственно: contrib/admin/static/admin
-        location /static/admin {
-            alias /usr/lib/python3.5/site-packages/django/contrib/admin/static/admin;
-        }
-
-        # на корневом url / реагируем с помощью сокета проекта
-        # у нас он называется "djing": upstream djing { server ...
-        location / {
-            uwsgi_pass djing;
-            include uwsgi_params;
-        }
+    <span class="c-red">location</span> / {
+        <span class="c-red">uwsgi_pass</span> djing;
+        <span class="c-red">include</span> uwsgi_params;
     }
 }
-                    </code>
+
+# Обработка https запросов
+<span class="c-red">server</span> {
+    <span class="c-red">listen</span> 443 ssl;
+    <span class="c-red">ssl</span> <span class="c-blue">on</span>;
+    <span class="c-red">server_name</span> &lt;ваш домен&gt; www.&lt;ваш домен&gt;;
+
+    <span class="c-red">ssl_certificate</span> &quot;/путь/к/вашему/сертификату.crt&quot;;
+    <span class="c-red">ssl_certificate_key</span> &quot;/путь/к/вашему/сертификату.key&quot;;
+    <span class="c-red">ssl_session_cache</span> shared:SSL:1m;
+    <span class="c-red">ssl_session_timeout</span>  5m;
+    <span class="c-red">ssl_ciphers</span> HIGH:!aNULL:!MD5;
+    <span class="c-red">ssl_prefer_server_ciphers</span> on;
+
+    <span class="c-red">location</span> = <span class="c-blue">/favicon.ico</span> { <span class="c-red">alias</span> /var/www/djing/static/img/favicon_m.ico; }
+    <span class="c-red">location</span> = <span class="c-blue">/robots.txt</span> { <span class="c-red">alias</span> /var/www/djing/robots.txt; }
+
+    <span class="c-red">location</span> <span class="c-blue">/media</span> {
+        <span class="c-red">alias</span> /var/www/djing/media;
+        <span class="c-red">expires</span> 7d;
+    }
+
+    <span class="c-red">location</span> <span class="c-blue">/static</span> {
+        <span class="c-red">alias</span> /var/www/djing/static;
+        <span class="c-red">expires</span> 1d;
+    }
+
+    <span class="c-red">location</span> / {
+        <span class="c-red">uwsgi_pass</span> djing;
+        <span class="c-red">include</span> uwsgi_params;
+    }
+}
+</code></pre>
+                <p>Это минимальный конфиг Nginx для работы. Проверте файл /run/uwsgi/djing.sock на доступность
+                    пользователю
+                    www-data для чтения.</p>
+                <p>Далее настраиваем uWSGI. Мой конфиг для uWSGI в debian:</p>
+                <blockquote>
+                    <p>/etc/uwsgi/apps-available/djing.ini</p>
+                    <pre><code class="lang-ini"><a name="l1"><span class="ln">1    </span></a><span
+                            class="s0">[uwsgi]</span>
+<a name="l2"><span class="ln">2    </span></a><span class="s2">chdir</span><span class="s1">=</span><span class="s3">/var/www/djing</span>
+<a name="l3"><span class="ln">3    </span></a><span class="s2">module</span><span class="s1">=</span><span class="s3">djing.wsgi</span>
+<a name="l4"><span class="ln">4    </span></a><span class="s2">master</span><span class="s1">=</span><span class="s3">True</span>
+<a name="l5"><span class="ln">5    </span></a><span class="s2">processes</span><span class="s1">=</span><span
+                                class="s3">8</span>
+<a name="l6"><span class="ln">6    </span></a><span class="s2">socket</span><span class="s1">=</span><span class="s3">/run/uwsgi/app/djing/socket</span>
+<a name="l7"><span class="ln">7    </span></a><span class="s4">;http-socket=:8000</span>
+<a name="l8"><span class="ln">8    </span></a><span class="s2">chmod-socket</span><span class="s1">=</span><span
+                                class="s3">644</span>
+<a name="l9"><span class="ln">9    </span></a><span class="s4">;pidfile=/run/uwsgi/django-master.pid</span>
+<a name="l10"><span class="ln">10   </span></a><span class="s2">vacuum</span><span class="s1">=</span><span class="s3">True</span>
+<a name="l11"><span class="ln">11   </span></a><span class="s2">plugin</span><span class="s1">=</span><span class="s3">python3</span>
+<a name="l12"><span class="ln">12   </span></a><span class="s4">;disable-logging=True</span>
+<a name="l13"><span class="ln">13   </span></a><span class="s2">venv</span><span class="s1">=</span><span class="s3">/var/www/djing/venv</span>
+</code></pre>
+                </blockquote>
+                <p>А теперь попробуем запустить биллинг в полной связке Python - Uwsgi - Nginx.
+                    Перейдём в папку биллинга, если вы вышли куда-то ещё, зайдём в баш из под пользователя www-data.</p>
+                <pre><code class="lang-bash"><a name="l1"><span class="ln">1    </span></a>sudo -u www-data -g www-data bash
+<a name="l3"><span class="ln">2    </span></a>cd /var/www/djing
+<a name="l4"><span class="ln">3    </span></a>source ./venv/bin/activate
+</code></pre>
+                <p>И скомпилируем переводы:</p>
+                <blockquote>
+                    <p><span class="c-green">$</span> ./manage.py compilemessages -l ru</p>
+                </blockquote>
+                <p>Попробуем запустить <em>uwsgi</em> и <em>djing</em> без <em>Nginx</em>, на порт 8000:
+                    Раскомментируйте строку <em>http-socket=:8000</em> в файле <em>djing.ini</em>, и закомментируйте
+                    <em>socket=/run/uwsgi/app/djing/socket</em> и <em>chmod-socket=644</em>, теперь можно попробовать
+                    запустить</p>
+                <blockquote>
+                    <p># uwsgi --gid www-data --uid www-data /etc/uwsgi/apps-available/djing.ini</p>
+                </blockquote>
+                <p>пробуем зайти в биллинг с браузера на &lt;адрес сервера&gt;:8000. Вам должен показаться диалог входа
+                    в
+                    систему:
+                    <img src="img/djing/login.png" alt="Login screenshot"></p>
+                <p>Теперь, если всё прошло успешно, поменяйте в конфиге <em>/etc/uwsgi.d/djing.ini</em> сокет с
+                    http-socket
+                    на unix socket:
+                    Раскомментируйте это:</p>
+                <blockquote>
+                    <p>socket=/run/uwsgi/app/djing/socket</p>
+                </blockquote>
+                <p>И закомментируйте эту строку:</p>
+                <blockquote>
+                    <p>http-socket=:8000</p>
+                </blockquote>
+                <p>Строка <em>http-socket=:8000</em> была для теста, чтоб посмотреть работает-ли uwsgi сам по себе.</p>
+                <p>Теперь можно попробовать запустить <em>nginx</em> и <em>uwsgi</em>. Ставим в
+                    <strong>djing/settings.py</strong> опцию <strong>DEBUG = False</strong>,
+                    и пробуем запустить нужные юниты:</p>
+                <blockquote>
+                    <p># systemctl start uwsgi\
+                        # systemctl start nginx</p>
+                </blockquote>
+                <h3>Настраиваем биллинг</h3>
+                <p>Все настройки биллинга находятся в файле <em>djing/settings.py</em>. Большинство опций вы можете
+                    найти в
+                    документации
+                    <a href="https://docs.djangoproject.com/en/2.1/ref/settings">Django settings</a>.
+                    Те опции, которые были добавлены мной в рамках проекта <em>djing</em>, описаны ниже в этом разделе
+                    документации по установке.</p>
+                <h4 id="djing-settings-py">djing/settings.py</h4>
+                <p><strong>USE_TZ</strong> &mdash; Это опция <em>Django</em>, но если вы не работаете в разных часовых
+                    диапазонах то я не рекомендую включать
+                    эту опцию чтоб небыло путаницы со временем. Это связано с тем что я ещё не тестировал поведение
+                    работы
+                    со временем при
+                    включённой опции <em>USE_TZ</em>.</p>
+                <p><strong>ALLOWED_HOSTS</strong> &mdash; Тоже опция <em>Django</em>, но важная для безопасности,
+                    укажите в
+                    списке возможные имена вашего сервера.
+                    Подробнее в документации <a
+                            href="https://docs.djangoproject.com/en/2.1/ref/settings/#allowed-hosts">Django
+                        settings</a>.</p>
+                <p><strong>DEFAULT_PICTURE</strong> &mdash; Это путь к изображению по умолчанию, оно используется когда
+                    нужное изображение не найдено.</p>
+                <p><strong>PAGINATION_ITEMS_PER_PAGE</strong> &mdash; Количество выводимых элементов списка на странце с
+                    таблицей. Например, если поставить 30,
+                    то на странице абонентов на одной странице будет выведено 30 строк абонентов.</p>
+                <p><strong>DEFAULT_SNMP_PASSWORD</strong> &mdash; Пароль snmp по умолчанию для устройств, чтоб при
+                    создании
+                    устройства он был заполнен в нужном поле.
+                    Если нет такого пароля то оставьте пустым или None.</p>
+                <p><strong>TELEPHONE_REGEXP</strong> &mdash; Регулярное выражение для валидации номера телефона.</p>
+                <p><strong>API_AUTH_SECRET</strong> &mdash; Секретное слово для безопасной передачи комманд от скриптов.
+                    Содержимое данных можно увидеть, но нельзя изменить. Это нельзя применять для передачи паролей,
+                    секретных номеров, но вполне подходит для защищённого управления. Безопасность гарантируется хеш
+                    суммой
+                    <strong>sha256</strong>. Секретное слово должен знать биллинг в конфиге, и доверенный скрипт на
+                    примере
+                    <em>agent/monitoring_agent.py</em>
+                    Позаботьтесь о том чтоб скрипт нельзя было просто так прочитать, или вынесите секретное слово
+                    куда-то.
+                    Если кто-то лишний узнает
+                    его то ваша система будет под угрозой.</p>
+                <p><strong>API_AUTH_SUBNET</strong> &mdash; Так же применяется для авторизации скриптов, но проверяет
+                    подсеть с которой была отправлена
+                    комманда. Даже если скрипт будет знать секретное слово, но не будет находится в одной из доверенных
+                    подсетей то в доступе будет отказано. Может быть строковым представлением подсети, например &#39;127.0.0.1/8&#39;,
+                    или списком
+                    подсетей в строковом представлении. Можно даже передать объект который на выходе при преобразовании
+                    в
+                    строку
+                    даст подсеть.</p>
+                <p><strong>COMPANY_NAME</strong> &mdash; Название вашей компании, будет отображаться в шапке сайта в
+                    административной части
+                    и в личном кабинете абонента.</p>
+                <p><strong>TELEGRAM_BOT_TOKEN</strong> &mdash; Когда вы включите оповещение через телеграм то вам сюда.
                 </p>
-            </div>
+                <h4>Создание БД</h4>
+                <p>Подразумевается что сервер баз данных у вас уже есть, или вы его можете установить сами.
+                    В конфиге настроить БД можно по инструкции <a
+                            href="https://docs.djangoproject.com/en/2.1/ref/settings/#databases">Django databases</a>.
+                </p>
+                <p>Убедитесть что вы в папке с проектом, комманда <strong>pwd</strong> должна выдать
+                    <em>/var/www/djing</em>.
+                    Чтоб создать бд, как описано в документации <a
+                            href="https://docs.djangoproject.com/en/2.1/ref/django-admin/#migrate">Django admin \&amp;
+                        migrate</a>,
+                    нужно запустить <strong>./manage.py migrate</strong> чтоб создать структуру БД. Вывод будет примерно
+                    таким:</p>
+                <pre><code class="lang-bash"><span class="c-green">$</span> ./manage.py migrate
+Operations to perform:
+  Apply all migrations: mapapp, contenttypes, msg_app, taskapp, accounts_app, devapp, statistics, tariff_app, admin, sessions, chatbot, auth, abonapp
+Running migrations:
+  Rendering model states... DONE
+  Applying mapapp.0001_initial... OK
+  Applying devapp.0001_initial... OK
+  Applying devapp.0002_auto_20160909_1018... OK
+  Applying devapp.0003_device_map_dot... OK
+  Applying contenttypes.0001_initial... OK
+...
+  Applying taskapp.0012_auto_20170407_0124... OK
+  Applying taskapp.0013_auto_20170413_1944... OK
+  Applying taskapp.0014_auto_20170416_1029... OK
+  Applying taskapp.0015_auto_20170816_1109... OK
+</code></pre>
+                <p>После этого вам стоит создать супер пользователя чтоб зайти в систему.</p>
+                <pre><code class="lang-bash"><span class="c-green">$</span> ./manage.py createsuperuser
+</code></pre>
+                <p>В интерактивном режиме ответьте на вопросы.</p>
+                <pre><code class="lang-bash"><span class="c-green">$</span> ./manage.py createsuperuser
+Username: username
+Telephone: +12223334455
+Password:
+Password (again):
+Superuser created successfully.
+</code></pre>
+                <p>Обратите внимание на то что номер телефона это обязательное поле для заполнения.
+                    Если у вас не выходит указать номер телефона, то проверте чтоб ваш телефон соответствовал
+                    регулярному
+                    выражению <strong>^(+[7,8,9,3]\d{10,11})?$</strong>.
+                    Если регулярное выражение вам не подхожит, то вы можете изенить его в настройках, см. опции в
+                    настройках
+                    выше.
+                    После изменения настроек они не сразу вступят в силу, нужно перезагрузить код django, для этого
+                    перезапустите <strong>uwsgi</strong>:</p>
+                <blockquote>
+                    <p># systemctl restart uwsgi</p>
+                </blockquote>
+                <p>Теперь произведите тестовый запуск:</p>
+                <blockquote>
+                    <p><span class="c-green">$</span> ./manage.py runserver 192.168.0.100:8000</p>
+                </blockquote>
+                <p>Если не подтягивается статика то проверте чтоб опция <strong>DEBUG</strong> в настройках была
+                    <strong>True</strong>.
+                </p>
+                <p>При условии что адрес вашего сервера <em>192.168.0.100</em>, вы сможете открыть биллинг по адресу
+                    <strong><a href="http://192.168.0.100:8000/">http://192.168.0.100:8000/</a></strong>.
+                    Введите логин и пароль супер пользователя которого вы создали по инструкции выше.</p>
+                <p>Если вы успешно зашли то можно пробовать запускать биллинг в рабочую обстановку.
+                    В настройках смените переменную <strong>DEBUG</strong> на <strong>False</strong> и перезапустите
+                    <em>uwsgi</em>.
+                </p>
+                <h3>Настраиваем демоны</h3>
+                <p>Если ваша система работает с поддержкой <a
+                        href="https://www.freedesktop.org/wiki/Software/systemd/"><strong>systemd</strong></a> то в
+                    каталоге
+                    <em>systemd_units</em> проекта вы найдёте юниты для systemd.
+                    Скопируйте их в каталог юнитов systemd, у меня это путь <em>/etc/systemd/system</em>.
+                    <strong>Настоятельно рекомендую заглянуть внутрь этих юнитов</strong>. Проверте пути исполняемых
+                    файлов,
+                    права и прочее.</p>
+                <p>Для запуска сервиса <strong>djing_rotate.service</strong> вам нужно сначала настроить сбор статистики
+                    по
+                    <a href="./netflow.md">netflow</a>.</p>
+                <p>Перед включением юнита <em>djing_telebot.service</em> создайте Telegram бота и впишите в файл <em>djing/settings.py</em>
+                    в переменную <em>TELEGRAM_BOT_TOKEN</em> токен вашего бота.
+                    С помощью этого бота вы будете получать различные сообщения из биллинга. Подробнее в инструкции к <a
+                            href="./bot.md">модулю оповещений</a>.</p>
+
+
+            </article>
         </section>
     </main>
     <footer class="container">
@@ -185,7 +447,8 @@ http {
             <small>Ресурс не ведёт предпринимательской деятельности</small>
         </div>
     </footer>
+</div>
 
-    <script type="text/javascript" src="js/my.js"></script>
+<script type="text/javascript" src="js/my.js"></script>
 </body>
 </html>
